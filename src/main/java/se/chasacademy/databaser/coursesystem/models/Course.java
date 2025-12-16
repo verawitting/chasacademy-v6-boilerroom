@@ -94,4 +94,8 @@ public class Course {
     public List<Participant> getParticipants() {
         return participants;
     }
+
+    public void addParticipiant(Participant participant) {
+        this.participants.add(participant);
+    }
 }

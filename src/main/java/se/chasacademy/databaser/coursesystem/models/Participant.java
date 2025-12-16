@@ -61,7 +61,8 @@ public class Participant {
         return courses;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void addCourse(Course course){
+        this.courses.add(course);
+        course.addParticipiant(this);
     }
 }

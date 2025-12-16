@@ -32,13 +32,13 @@ public class CourseSystemApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
         var teacher1 = new Teacher("Mona" , "Salin", "monas@mail.se");
-        var teacher2 = new Teacher("Roger", "Pontare", "rogers@mail.se");
+        var teacher2 = new Teacher("Roger", "Pontare", ""); //körs utan fel kod
 
         teacherRepository.save(teacher1);
         teacherRepository.save(teacher2);
 
         var room1 = new Room("Rosenbad", "Rosenbadsvägen 1", 349);
-        var room2 = new Room("Globen", "Globenvägen 1", 1000);
+        var room2 = new Room("Globen", "Globenvägen 1", 2); //ger fel måste bli mer än 1
 
         roomRepository.save(room1);
         roomRepository.save(room2);
@@ -53,17 +53,24 @@ public class CourseSystemApplication implements CommandLineRunner {
         courseRepository.save(course3);
         courseRepository.save(course4);
 
-        var p1 = new Participant("Darin", "darin@mail.se", course2);
-        var p2 = new Participant("Carola", "carola@mail.se", course1);
-        var p3 = new Participant("Lena PH", "lenas@mail.se", course4);
-        var p4 = new Participant("David Druid", "davids@mail.se", course3);
+        var p1 = new Participant("Darin", "darin@mail.se");
+        var p2 = new Participant("Carola", "carola@mail.se");
+        var p3 = new Participant("Lena PH", "lenas@mail.se");
+        var p4 = new Participant("David Druid", "davids@mail.se");
+
+        p1.addCourse(course1);
+        p1.addCourse(course2);
+        p2.addCourse(course2);
+        p3.addCourse(course3);
+        p4.addCourse(course4);
 
         participantRepository.save(p1);
         participantRepository.save(p2);
         participantRepository.save(p3);
         participantRepository.save(p4);
 
-        var cs1 = new CourseSession(LocalDateTime.of(2025,12,25,12,30), course4, room2);
+
+        var cs1 = new CourseSession(LocalDateTime.of(2025,12,25,12,30), course4, null); //kan inte köras utan room
 
         courseSessionRepository.save(cs1);
 
@@ -71,7 +78,6 @@ public class CourseSystemApplication implements CommandLineRunner {
         courseRepository.findAllByTeacherId(1L).forEach((course)-> System.out.println(course.getTitle()));
 
 //        - Kurser med antal deltagare
-
 
 //        - Kommande kurstillfällen per lokal
         courseSessionRepository.findAllAfterNow().forEach((courseSession) -> System.out.println(courseSession.getCourse().getTitle()));
