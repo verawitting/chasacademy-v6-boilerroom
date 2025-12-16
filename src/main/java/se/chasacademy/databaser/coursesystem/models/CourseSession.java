@@ -39,7 +39,7 @@ public class CourseSession {
         this.course = course;
         this.room = room;
         course.getSessions().add(this);
-        // room.getSessions().add(this);
+        room.addSession(this);
     }
 
     public long getId() {
@@ -59,8 +59,12 @@ public class CourseSession {
     }
 
     public void setRoom(@NonNull Room room) {
-        // this.room.getSessions().remove(this);
+        // Early out for stupid room assignments
+        if (this.room == room) {
+            return;
+        }
+        this.room.removeSession(this);
         this.room = room;
-        // room.getSessions().add(this);
+        room.addSession(this);
     }
 }
