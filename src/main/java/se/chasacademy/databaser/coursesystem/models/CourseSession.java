@@ -22,6 +22,7 @@ public class CourseSession {
     @ManyToOne(optional = false)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
@@ -66,5 +67,9 @@ public class CourseSession {
         this.room.removeSession(this);
         this.room = room;
         room.addSession(this);
+    }
+
+    public @NonNull Course getCourse() {
+        return course;
     }
 }
