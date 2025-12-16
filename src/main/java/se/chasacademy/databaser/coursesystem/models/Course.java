@@ -22,7 +22,7 @@ public class Course {
     private String description;
 
     @Min(1)
-    @Max(5)
+    @Max(50)
     @Column(name = "max_participants", nullable = false)
     private int maxParticipants;
 
