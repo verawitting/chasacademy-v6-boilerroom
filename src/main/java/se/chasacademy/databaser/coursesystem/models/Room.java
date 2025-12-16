@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,7 @@ public class Room {
     private int capacity;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
-    private List<CourseSession> sessions;
+    private List<CourseSession> sessions = new ArrayList<>();
 
     public Room() {
     }
@@ -37,53 +38,58 @@ public class Room {
         this.capacity = capacity;
     }
 
-        public Long getId () {
-            return id;
-        }
-
-        public void setId (Long id){
-            this.id = id;
-        }
-
-        public String getName () {
-            return name;
-        }
-
-        public void setName (String name){
-            this.name = name;
-        }
-
-        public String getAddress () {
-            return address;
-        }
-
-        public void setAddress (String address){
-            this.address = address;
-        }
-
-        public int getCapacity () {
-            return capacity;
-        }
-
-        public void setCapacity ( int capacity){
-            this.capacity = capacity;
-        }
-
-        public List<CourseSession> getSessions () {
-            return sessions;
-        }
-
-        public void setSessions (List < CourseSession > sessions) {
-            this.sessions = sessions;
-        }
-
-        public void addSession(CourseSession session) {
-            this.sessions.add(session);
-        }
-
-        public void removeSession(CourseSession session) {
-            this.sessions.remove(session);
-        }
-
-
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public List<CourseSession> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<CourseSession> sessions) {
+        this.sessions = sessions;
+    }
+
+    public void addSession(CourseSession session) {
+        if (sessions == null) {
+            sessions = new ArrayList<>();
+        }
+        sessions.add(session);
+        session.setRoom(this);
+    }
+
+    public void removeSession(CourseSession session) {
+        if (sessions != null) {
+            sessions.remove(session);
+            session.setRoom(null);
+        }
+    }
+}
