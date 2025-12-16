@@ -22,6 +22,9 @@ public class CourseSession {
     @ManyToOne(optional = false)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
 
     /**
      * Do not call this constructor directly. Use
@@ -31,10 +34,12 @@ public class CourseSession {
         this.date = LocalDateTime.now();
     }
 
-    public CourseSession(@NonNull LocalDateTime date, @NonNull Course course) {
+    public CourseSession(@NonNull LocalDateTime date, @NonNull Course course, @NonNull Room room) {
         this.date = date;
         this.course = course;
+        this.room = room;
         course.getSessions().add(this);
+        // room.getSessions().add(this);
     }
 
     public long getId() {
@@ -49,4 +54,13 @@ public class CourseSession {
         this.date = date;
     }
 
+    public @NonNull Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(@NonNull Room room) {
+        // this.room.getSessions().remove(this);
+        this.room = room;
+        // room.getSessions().add(this);
+    }
 }
