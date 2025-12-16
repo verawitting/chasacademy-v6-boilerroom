@@ -23,16 +23,10 @@ public class Participant {
 
     //constructors
     public Participant() {
-    }
-
-    public Participant(String fullName, String email, Course courses) {
-        this.fullName = fullName;
-        this.email = email;
         this.courses = new HashSet<>();
     }
 
-    public Participant(long id, String fullName, String email, Course courses) {
-        this.id = id;
+    public Participant(String fullName, String email) {
         this.fullName = fullName;
         this.email = email;
         this.courses = new HashSet<>();
