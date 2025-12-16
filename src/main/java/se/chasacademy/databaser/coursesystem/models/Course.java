@@ -1,6 +1,8 @@
 package se.chasacademy.databaser.coursesystem.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.hibernate.annotations.Check;
 
 import java.util.ArrayList;
@@ -19,7 +21,8 @@ public class Course {
     @Column(name = "description")
     private String description;
 
-    @Check(constraints = "max_participants >= 1 AND max_participants <= 50")
+    @Min(1)
+    @Max(5)
     @Column(name = "max_participants", nullable = false)
     private int maxParticipants;
 
