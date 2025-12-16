@@ -33,16 +33,19 @@ public class CourseSystemApplication implements CommandLineRunner {
     public void run(String... args) {
         var teacher1 = new Teacher("Mona", "Salin", "monas@mail.se");
         var teacher2 = new Teacher("Roger", "Pontare", "rogerp@mail.se");
-        //var teacher2 = new Teacher("Roger", "Pontare", "monas@mail.se");
+        var teacher3 = new Teacher("Roger2", "Pontare2", "rogerp@mail.se"); //uniqe email error if saved
 
         teacherRepository.save(teacher1);
         teacherRepository.save(teacher2);
+        //teacherRepository.save(teacher3);
 
         var room1 = new Room("Rosenbad", "Rosenbadsvägen 1", 349);
         var room2 = new Room("Globen", "Globenvägen 1", 2);
+        var room3 = new Room("Globen2", "Globenvägen 1", 0); //capacity must be at least 1 if saved
 
         roomRepository.save(room1);
         roomRepository.save(room2);
+        //roomRepository.save(room3);
 
         var course1 = new Course("samhällskunskap", "En bra kurs.", 25, teacher1);
         var course2 = new Course("musik", "Värsta schlagern.", 50, teacher2);
@@ -76,14 +79,17 @@ public class CourseSystemApplication implements CommandLineRunner {
         courseSessionRepository.save(cs1);
 
 //       Kurser med lärare
+        System.out.println("---Kurser med lärare");
         courseRepository.findAllByTeacherId(1L).forEach((course) -> System.out.println(course.getTitle()));
 
 //        - Kurser med antal deltagare
 
 //        - Kommande kurstillfällen per lokal
+        System.out.println("---Kommande kurstillfällen per lokal");
         courseSessionRepository.findAllAfterNow().forEach((courseSession) -> System.out.println(courseSession.getCourse().getTitle()));
 
 //        - Lokaler med capacity > X
+        System.out.println("---Lokaler med capacity > X");
         roomRepository.findByCapacityGreaterThan(30).forEach((room) -> System.out.println(room.getCapacity()));
 
     }
