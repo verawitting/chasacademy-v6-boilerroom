@@ -23,7 +23,7 @@ public class Room {
     private String address;
 
     @Column
-    @Min(1)
+    @Min(value = 1, message = "Capacity must be at least 1")
     private int capacity;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
