@@ -26,6 +26,8 @@ public class Teacher {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    public Teacher() {
+    }
     public Teacher(String firstName, String lastName, String email){
         this.firstName = firstName;
         this.lastName = lastName;
