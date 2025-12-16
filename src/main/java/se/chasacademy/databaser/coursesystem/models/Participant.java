@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "participant")
-public class participant {
+public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,19 +19,19 @@ public class participant {
     private String email;
 
     @ManyToMany(mappedBy = "participants")
-    private Set<course> courses;
+    private Set<Course> courses;
 
     //constructors
-    public participant() {
+    public Participant() {
     }
 
-    public participant(String fullName, String email, course courses) {
+    public Participant(String fullName, String email, Course courses) {
         this.fullName = fullName;
         this.email = email;
         this.courses = new HashSet<>();
     }
 
-    public participant(long id, String fullName, String email, course courses) {
+    public Participant(long id, String fullName, String email, Course courses) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -63,11 +63,11 @@ public class participant {
         this.email = email;
     }
 
-    public Set<course> getCourses() {
+    public Set<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<course> courses) {
+    public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
 }
