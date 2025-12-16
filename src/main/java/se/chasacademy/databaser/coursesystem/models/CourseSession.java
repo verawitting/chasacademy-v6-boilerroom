@@ -54,11 +54,11 @@ public class CourseSession {
         this.date = date;
     }
 
-    public Room getRoom() {
+    public @NonNull Room getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(@NonNull Room room) {
         // this.room.getSessions().remove(this);
         this.room = room;
         // room.getSessions().add(this);
